@@ -6,5 +6,7 @@
 
 
 【今年還是不夠錢買psQQ，不如我們用PyQt自己寫一個】 
+
+
 去年都學會了OpenCV，今年來學PyQt，可以自己寫 photoshop 了吧！
 
