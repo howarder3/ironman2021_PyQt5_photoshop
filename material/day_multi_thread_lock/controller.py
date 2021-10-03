@@ -7,6 +7,8 @@ import time
 
 from UI import Ui_MainWindow
 
+
+
 class each_Qthread(QThread):
     qthread_signal = pyqtSignal(int)
 
@@ -31,17 +33,17 @@ class MainWindow_controller(QtWidgets.QMainWindow):
         self.ui.pushButton_3.clicked.connect(self.ButtonClick3) 
         
     def ButtonClick(self):
-        self.qthread = External()
+        self.qthread = each_Qthread()
         self.qthread.qthread_signal.connect(self.progress_changed) 
         self.qthread.start()
 
     def ButtonClick2(self):
-        self.qthread = External()
+        self.qthread = each_Qthread()
         self.qthread.qthread_signal.connect(self.progress_changed2) 
         self.qthread.start()
 
     def ButtonClick3(self):
-        self.qthread = External()
+        self.qthread = each_Qthread()
         self.qthread.qthread_signal.connect(self.progress_changed3) 
         self.qthread.start()
 

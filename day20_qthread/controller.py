@@ -7,7 +7,7 @@ import time
 
 from UI import Ui_MainWindow
 
-class External(QThread):
+class ThreadTask(QThread):
     qthread_signal = pyqtSignal(int)
 
     def start_progress(self):
@@ -29,7 +29,7 @@ class MainWindow_controller(QtWidgets.QMainWindow):
         self.ui.pushButton.clicked.connect(self.ButtonClick) 
         
     def ButtonClick(self):
-        self.qthread = External()
+        self.qthread = ThreadTask()
         self.qthread.qthread_signal.connect(self.progress_changed) 
         self.qthread.start_progress()
 

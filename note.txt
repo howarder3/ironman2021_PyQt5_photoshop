@@ -1,0 +1,19 @@
+# day 1 no qtdesinger
+# UI control
+
+# log
+# imshow
+
+# pyinstaller
+
+# RGB
+
+# 寫一支大家都能用，而且又讓一般人不用面對終端機那有點恐怖(?)畫面的應用程式!
+
+# 文字顯示 - 顯示 log
+# 按鈕控制
+# calculator
+# video player
+# photoshop
+# 自動點擊正確顏色小程式
+# 偵測畫面顏色
