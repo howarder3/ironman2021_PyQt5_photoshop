@@ -71,7 +71,7 @@
     <string>Position:</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="textEdit">
+  <widget class="QTextEdit" name="text_pos">
    <property name="geometry">
     <rect>
      <x>230</x>
@@ -81,7 +81,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTextEdit" name="textEdit_2">
+  <widget class="QTextEdit" name="text_rgb">
    <property name="geometry">
     <rect>
      <x>230</x>
@@ -91,7 +91,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTextEdit" name="textEdit_3">
+  <widget class="QTextEdit" name="text_css">
    <property name="geometry">
     <rect>
      <x>230</x>
