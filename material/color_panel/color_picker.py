@@ -15,7 +15,7 @@ class MainWnd(QWidget):
         mainLayout = QGridLayout(self)
         self.labColor = QLabel()
         self.labColor.setFrameStyle(QFrame.StyledPanel | QFrame.Sunken)
-        self.labColor.setMinimumSize(10, 80)
+        self.labColor.setMinimumSize(80, 80)
         mainLayout.addWidget(self.labColor, 0, 0, 3, 1)
 
         labs = list(map(lambda text: QLabel(text), ['RGB: ', 'CSS: ', 'position: ']))
@@ -32,8 +32,7 @@ class MainWnd(QWidget):
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
-        self.setWindowFlags(Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint)
-        self.setWindowFlags(Qt.WindowStaysOnTopHint)
+        self.setWindowFlags(Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint | Qt.WindowStaysOnTopHint)
 
         self.setWindowTitle('Color Picker v1.0')
         # self.setWindowIcon(QIcon)
