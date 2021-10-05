@@ -36,9 +36,6 @@
       <height>80</height>
      </rect>
     </property>
-    <property name="frameShape">
-     <enum>QFrame::WinPanel</enum>
-    </property>
     <property name="frameShadow">
      <enum>QFrame::Plain</enum>
     </property>

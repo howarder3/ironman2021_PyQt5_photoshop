@@ -54,6 +54,7 @@ class MainWnd(QWidget):
         self.labColor.setStyleSheet('background-color:rgb({});'.format(strRGB))
 
         hexs = list(map(lambda x: str(hex(x)).replace('0x', '').upper(), [r ,g, b]))
+        print(hexs)
         strCSS = '#{:0>2s}{:0>2s}{:0>2s}'.format(*hexs)
         self.txtCSS.setText(strCSS)
 

@@ -13,6 +13,8 @@ class colorSelector(QWidget):
         color = QColorDialog.getColor()
         if color.isValid():
             print(color.name())
+            print(color)
+            print(color.red(), color.green(), color.blue())
 
 
 if __name__ == '__main__':
