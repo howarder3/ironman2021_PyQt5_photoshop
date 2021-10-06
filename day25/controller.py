@@ -8,12 +8,7 @@ import os
 
 
 from UI import Ui_MainWindow
-from img_controller import img_controller
-
-# set: big change
-# update: simple update for info, no calculation... (format: update_type_name)
-
-# private function: We do NOT want user directly call this function 
+from video_controller import video_controller
 
 class MainWindow_controller(QMainWindow):
     def __init__(self):
@@ -23,30 +18,16 @@ class MainWindow_controller(QMainWindow):
         self.setup_control()
 
     def setup_control(self):
-        self.file_path = ''
-        self.img_controller = img_controller(img_path=self.file_path,
-                                             ui=self.ui)
-
-        self.ui.btn_open_file.clicked.connect(self.open_file)         
-        self.ui.btn_zoom_in.clicked.connect(self.img_controller.set_zoom_in)
-        self.ui.btn_zoom_out.clicked.connect(self.img_controller.set_zoom_out)
-        self.ui.slider_zoom.valueChanged.connect(self.getslidervalue)        
+        self.ui.button_openfile.clicked.connect(self.open_file)        
 
     def open_file(self):
-        filename, filetype = QFileDialog.getOpenFileName(self, "Open file", "./") # start path        
-        self.init_new_picture(filename)
-
-    def init_new_picture(self, filename):
-        self.ui.slider_zoom.setProperty("value", 50)
-        self.img_controller.set_path(filename)        
-
-
-    def getslidervalue(self):        
-        self.img_controller.set_slider_value(self.ui.slider_zoom.value()+1)
-
-    # def getPos(self , event):
-    #     x = event.pos().x()
-    #     y = event.pos().y() 
-    #     print(f"(x, y) = ({x}, {y})")
-
+        filename, filetype = QFileDialog.getOpenFileName(self, "Open file Window", "./", "Video Files(*.mp4 *.avi)") # start path        
+        self.video_path = filename
+        # self.video_controller = video_controller(video_path=self.video_path,
+        #                                          ui=self.ui)
+        self.ui.label_filepath.setText(f"video path: {self.video_path}")
+        self.ui.button_play.clicked.connect(self.video_controller.play())         
+        self.ui.button_stop.clicked.connect(self.video_controller.stop())
+        self.ui.button_pause.clicked.connect(self.video_controller.pause())
+        
 

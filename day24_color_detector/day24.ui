@@ -42,7 +42,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>CSS:</string>
+    <string>HEX:</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
@@ -91,7 +91,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QTextEdit" name="text_css">
+  <widget class="QTextEdit" name="text_hex">
    <property name="geometry">
     <rect>
      <x>230</x>

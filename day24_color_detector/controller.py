@@ -42,4 +42,4 @@ class MainWindow_controller(QMainWindow):
 
         self.ui.label.setStyleSheet('background-color:rgb({});'.format(strRGB))
         self.ui.text_rgb.setText(f"({strRGB})")
-        self.ui.text_css.setText(color.name().upper())
+        self.ui.text_hex.setText(color.name().upper())

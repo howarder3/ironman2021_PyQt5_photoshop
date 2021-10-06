@@ -9,12 +9,15 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtCore import Qt
 
 class Ui_MainWindow(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(400, 171)
+        # 只有縮小/關閉 (取消放大)
+        # 視窗永遠在最上層，適合互動性高的程式
+        Form.setWindowFlags(Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint| Qt.WindowStaysOnTopHint)
         self.label = QtWidgets.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(40, 50, 80, 80))
         self.label.setFrameShape(QtWidgets.QFrame.WinPanel)
@@ -35,9 +38,9 @@ class Ui_MainWindow(object):
         self.text_rgb = QtWidgets.QTextEdit(Form)
         self.text_rgb.setGeometry(QtCore.QRect(230, 70, 131, 31))
         self.text_rgb.setObjectName("text_rgb")
-        self.text_css = QtWidgets.QTextEdit(Form)
-        self.text_css.setGeometry(QtCore.QRect(230, 110, 131, 31))
-        self.text_css.setObjectName("text_css")
+        self.text_hex = QtWidgets.QTextEdit(Form)
+        self.text_hex.setGeometry(QtCore.QRect(230, 110, 131, 31))
+        self.text_hex.setObjectName("text_hex")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -46,7 +49,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "Color"))
-        self.label_2.setText(_translate("Form", "CSS:"))
+        self.label_2.setText(_translate("Form", "HEX:"))
         self.label_3.setText(_translate("Form", "RGB:"))
         self.label_4.setText(_translate("Form", "Position:"))
 
@@ -55,7 +58,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
-    ui = Ui_Form()
+    ui = Ui_MainWindow()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec_())
