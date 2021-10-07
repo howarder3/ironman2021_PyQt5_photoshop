@@ -2,7 +2,7 @@ from functools import wraps
 import time
 
 def howard_timer(func):
-    @wraps(func)
+    #@wraps(func)
     def wrap(*args, **kargs):
         time_start = time.time()
         value = func(*args, **kargs)

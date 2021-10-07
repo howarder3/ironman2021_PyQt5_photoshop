@@ -18,20 +18,21 @@ class video_controller(object):
         self.qpixmap_fix_width = 800 # 16x9 = 1920x1080 = 1280x720 = 800x450
         self.qpixmap_fix_height = 450
         self.current_frame_no = 0
-        self.videoplayer_state = "stop"
+        self.videoplayer_state = "pause"
         self.init_video_info()
         self.set_video_player()
 
     def init_video_info(self):
         videoinfo = opencv_engine.getvideoinfo(self.video_path)
-        self.vc = videoinfo["vc"] 
-        self.video_fps = videoinfo["fps"] 
-        self.video_total_frame_count = videoinfo["frame_count"] 
+        self.vc = videoinfo["vc"]
+        self.video_fps = videoinfo["fps"]
+        self.video_total_frame_count = videoinfo["frame_count"]
         self.video_width = videoinfo["width"]
-        self.video_height = videoinfo["height"] 
+        self.video_height = videoinfo["height"]
 
+        self.ui.slider_videoframe.setRange(0, self.video_total_frame_count-1)
+        self.ui.slider_videoframe.valueChanged.connect(self.getslidervalue)
 
-        # self.ui.slider_videoframe
 
     def set_video_player(self):
         self.timer=QTimer() # init QTimer
@@ -73,7 +74,10 @@ class video_controller(object):
 
     def timer_timeout_job(self):
         if (self.videoplayer_state == "play"):
-            self.current_frame_no += 1
+            if self.current_frame_no >= self.video_total_frame_count-1:
+                self.videoplayer_state = "pause"
+            else:
+                self.current_frame_no += 1
 
         if (self.videoplayer_state == "stop"):
             self.current_frame_no = 0
@@ -85,3 +89,16 @@ class video_controller(object):
 
         frame = self.__get_next_frame()
         self.__update_label_frame(frame)
+
+    def getslidervalue(self):
+        self.current_frame_no = self.ui.slider_videoframe.value()
+
+    def setslidervalue(self, value):
+        self.ui.slider_videoframe.setValue(self.current_frame_no)
+
+
+
+
+
+
+
