@@ -47,6 +47,7 @@ class video_controller(object):
     def __get_next_frame(self):
         ret, frame = self.vc.read()
         self.ui.label_framecnt.setText(f"frame number: {self.current_frame_no}/{self.video_total_frame_count}")
+        self.setslidervalue(self.current_frame_no)
         return frame
 
     def __update_label_frame(self, frame):       
@@ -75,7 +76,9 @@ class video_controller(object):
     def timer_timeout_job(self):
         if (self.videoplayer_state == "play"):
             if self.current_frame_no >= self.video_total_frame_count-1:
-                self.videoplayer_state = "pause"
+                #self.videoplayer_state = "pause"
+                self.current_frame_no = 0 # auto replay
+                self.set_current_frame_no(self.current_frame_no)
             else:
                 self.current_frame_no += 1
 
