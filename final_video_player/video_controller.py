@@ -36,8 +36,8 @@ class video_controller(object):
     def set_video_player(self):
         self.timer=QTimer() # init QTimer
         self.timer.timeout.connect(self.timer_timeout_job) # when timeout, do run one
-        self.timer.start(1000//self.video_fps) # start Timer, here we set '1000ms//Nfps' while timeout one time
-        # self.timer.start(1) # but if CPU can not decode as fast as fps, we set 1 (need decode time)
+        # self.timer.start(1000//self.video_fps) # start Timer, here we set '1000ms//Nfps' while timeout one time
+        self.timer.start(1) # but if CPU can not decode as fast as fps, we set 1 (need decode time)
 
     def set_current_frame_no(self, frame_no):
         self.vc.set(1, frame_no) # bottleneck
@@ -45,7 +45,7 @@ class video_controller(object):
     @howard_timer
     def __get_next_frame(self):
         ret, frame = self.vc.read()
-        self.ui.label_framecnt.setText(f"frame number: {frame_no}/{self.video_total_frame_count}")
+        self.ui.label_framecnt.setText(f"frame number: {self.current_frame_no}/{self.video_total_frame_count}")
         return frame
 
     def __update_label_frame(self, frame):       
@@ -72,9 +72,6 @@ class video_controller(object):
         self.videoplayer_state = "pause"
 
     def timer_timeout_job(self):
-        frame = self.__get_next_frame(self.current_frame_no)
-        self.__update_label_frame(frame)
-
         if (self.videoplayer_state == "play"):
             self.current_frame_no += 1
 
@@ -86,3 +83,5 @@ class video_controller(object):
             self.current_frame_no = self.current_frame_no
             self.set_current_frame_no(self.current_frame_no)
 
+        frame = self.__get_next_frame()
+        self.__update_label_frame(frame)

@@ -3,6 +3,7 @@ from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import QTimer 
 
 from opencv_engine import opencv_engine
+import time
 
 # videoplayer_state_dict = {
 #  "stop":0,   
@@ -39,8 +40,10 @@ class video_controller(object):
         self.timer.start(1) # but if CPU can not decode as fast as fps, we set 1 (need decode time)
 
     def __get_frame_from_frame_no(self, frame_no):
-        self.vc.set(1, frame_no)
+        ts = time.time()
+        #self.vc.set(1, frame_no)
         ret, frame = self.vc.read()
+        print(time.time()-ts)
         self.ui.label_framecnt.setText(f"frame number: {frame_no}/{self.video_total_frame_count}")
         return frame
 
