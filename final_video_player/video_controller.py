@@ -3,6 +3,7 @@ from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import QTimer 
 
 from opencv_engine import opencv_engine
+from howard_utils import howard_timer
 
 # videoplayer_state_dict = {
 #  "stop":0,   
@@ -41,6 +42,7 @@ class video_controller(object):
     def set_current_frame_no(self, frame_no):
         self.vc.set(1, frame_no) # bottleneck
 
+    @howard_timer
     def __get_next_frame(self):
         ret, frame = self.vc.read()
         self.ui.label_framecnt.setText(f"frame number: {frame_no}/{self.video_total_frame_count}")
