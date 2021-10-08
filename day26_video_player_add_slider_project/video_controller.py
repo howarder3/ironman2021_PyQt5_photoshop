@@ -95,9 +95,11 @@ class video_controller(object):
 
     def getslidervalue(self):
         self.current_frame_no = self.ui.slider_videoframe.value()
+        self.set_current_frame_no(self.current_frame_no)
 
     def setslidervalue(self, value):
         self.ui.slider_videoframe.setValue(self.current_frame_no)
+
 
 
 
