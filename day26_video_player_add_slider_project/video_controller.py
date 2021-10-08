@@ -1,14 +1,14 @@
 from PyQt5 import QtCore 
 from PyQt5.QtGui import QImage, QPixmap
-from PyQt5.QtCore import QTimer, Qt
-from PyQt5.QtWidgets import QSlider
+from PyQt5.QtCore import QTimer 
 
 from opencv_engine import opencv_engine
+from howard_utils import howard_timer
 
 # videoplayer_state_dict = {
-#  "stop":0,
+#  "stop":0,   
 #  "play":1,
-#  "pause":2
+#  "pause":2     
 # }
 
 class video_controller(object):
@@ -33,11 +33,6 @@ class video_controller(object):
         self.ui.slider_videoframe.setRange(0, self.video_total_frame_count-1)
         self.ui.slider_videoframe.valueChanged.connect(self.getslidervalue)
 
-    def getslidervalue(self):
-        self.current_frame_no = self.ui.slider_videoframe.value()
-
-    def setslidervalue(self, value):
-        self.ui.slider_videoframe.setValue(self.current_frame_no)
 
     def set_video_player(self):
         self.timer=QTimer() # init QTimer
@@ -45,14 +40,17 @@ class video_controller(object):
         # self.timer.start(1000//self.video_fps) # start Timer, here we set '1000ms//Nfps' while timeout one time
         self.timer.start(1) # but if CPU can not decode as fast as fps, we set 1 (need decode time)
 
-    def __get_frame_from_frame_no(self, frame_no):
-        self.vc.set(1, frame_no)
+    def set_current_frame_no(self, frame_no):
+        self.vc.set(1, frame_no) # bottleneck
+
+    #@howard_timer
+    def __get_next_frame(self):
         ret, frame = self.vc.read()
-        self.ui.label_framecnt.setText(f"frame number: {frame_no}/{self.video_total_frame_count-1}")
-        self.setslidervalue(frame_no)
+        self.ui.label_framecnt.setText(f"frame number: {self.current_frame_no}/{self.video_total_frame_count}")
+        self.setslidervalue(self.current_frame_no)
         return frame
 
-    def __update_label_frame(self, frame):
+    def __update_label_frame(self, frame):       
         bytesPerline = 3 * self.video_width
         qimg = QImage(frame, self.video_width, self.video_height, bytesPerline, QImage.Format_RGB888).rgbSwapped()
         self.qpixmap = QPixmap.fromImage(qimg)
@@ -76,18 +74,36 @@ class video_controller(object):
         self.videoplayer_state = "pause"
 
     def timer_timeout_job(self):
-        frame = self.__get_frame_from_frame_no(self.current_frame_no)
-        self.__update_label_frame(frame)
-
         if (self.videoplayer_state == "play"):
             if self.current_frame_no >= self.video_total_frame_count-1:
-                self.videoplayer_state = "pause"
+                #self.videoplayer_state = "pause"
+                self.current_frame_no = 0 # auto replay
+                self.set_current_frame_no(self.current_frame_no)
             else:
                 self.current_frame_no += 1
 
         if (self.videoplayer_state == "stop"):
             self.current_frame_no = 0
+            self.set_current_frame_no(self.current_frame_no)
 
         if (self.videoplayer_state == "pause"):
             self.current_frame_no = self.current_frame_no
+            self.set_current_frame_no(self.current_frame_no)
+
+        frame = self.__get_next_frame()
+        self.__update_label_frame(frame)
+
+    def getslidervalue(self):
+        self.current_frame_no = self.ui.slider_videoframe.value()
+        self.set_current_frame_no(self.current_frame_no)
+
+    def setslidervalue(self, value):
+        self.ui.slider_videoframe.setValue(self.current_frame_no)
+
+
+
+
+
+
+
 

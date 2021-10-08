@@ -25,7 +25,7 @@ class MainWindow_controller(QMainWindow):
         self.timer=QTimer() # init QTimer
         self.timer.timeout.connect(self.run) # when timeout, do run one
         self.timer.start(1) # start Timer, here we set '1ms' while timeout one time
-        self.time_counter =  # init time counter # for testing: 3599000
+        self.time_counter = 0 # init time counter # for testing: 3599000
 
     def run(self):
         self.ui.label.setText(str(self.set_time_counter_format(self.time_counter))) # show time_counter (by format)
