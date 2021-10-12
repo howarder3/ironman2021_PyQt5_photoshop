@@ -21,22 +21,6 @@
    <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label_img_shape">
-    <property name="geometry">
-     <rect>
-      <x>880</x>
-      <y>780</y>
-      <width>641</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>Current image shape: (0,0), Origin image shape: (0,0)</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btn_open_file">
     <property name="geometry">
      <rect>
@@ -48,54 +32,6 @@
     </property>
     <property name="text">
      <string>Open file</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_click_pos">
-    <property name="geometry">
-     <rect>
-      <x>940</x>
-      <y>710</y>
-      <width>191</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>clicked position = (x, y)</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_real_pos">
-    <property name="geometry">
-     <rect>
-      <x>940</x>
-      <y>750</y>
-      <width>191</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>real position = (x, y)</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_norm_pos">
-    <property name="geometry">
-     <rect>
-      <x>940</x>
-      <y>730</y>
-      <width>191</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color:rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>normalized position = (x, y)</string>
     </property>
    </widget>
    <widget class="QWidget" name="verticalLayoutWidget">
@@ -122,7 +58,7 @@
           <height>597</height>
          </rect>
         </property>
-        <widget class="QLabel" name="label_image">
+        <widget class="QLabel" name="label_img">
          <property name="geometry">
           <rect>
            <x>0</x>
@@ -162,8 +98,8 @@
    <widget class="QLabel" name="label_filepath">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>760</y>
+      <x>50</x>
+      <y>770</y>
       <width>841</width>
       <height>71</height>
      </rect>
@@ -296,7 +232,7 @@
       <x>910</x>
       <y>267</y>
       <width>341</width>
-      <height>191</height>
+      <height>197</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -430,14 +366,14 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1541</width>
-      <height>951</height>
+      <width>2000</width>
+      <height>2000</height>
      </rect>
     </property>
     <property name="maximumSize">
      <size>
-      <width>1541</width>
-      <height>951</height>
+      <width>2000</width>
+      <height>2000</height>
      </size>
     </property>
     <property name="autoFillBackground">
@@ -501,18 +437,67 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>700</y>
+      <width>421</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_click_pos">
+       <property name="styleSheet">
+        <string notr="true">color:rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>clicked position = (x, y)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_norm_pos">
+       <property name="styleSheet">
+        <string notr="true">color:rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>normalized position = (x, y)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_real_pos">
+       <property name="styleSheet">
+        <string notr="true">color:rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>real position = (x, y)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_img_shape">
+       <property name="styleSheet">
+        <string notr="true">color:rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Current image shape: (0,0), Origin image shape: (0,0)</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
    <zorder>Background</zorder>
-   <zorder>label_img_shape</zorder>
    <zorder>btn_open_file</zorder>
-   <zorder>label_click_pos</zorder>
-   <zorder>label_real_pos</zorder>
-   <zorder>label_norm_pos</zorder>
    <zorder>verticalLayoutWidget</zorder>
    <zorder>Logo</zorder>
    <zorder>label_filepath</zorder>
    <zorder>verticalLayoutWidget_2</zorder>
    <zorder>verticalLayoutWidget_3</zorder>
    <zorder>layoutWidget</zorder>
+   <zorder>verticalLayoutWidget_4</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -520,7 +505,7 @@
      <x>0</x>
      <y>0</y>
      <width>1282</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMenu">

@@ -1,13 +1,13 @@
-# import logging
+# conda install pyqt
+# pip install opencv-python
+# pip install pytz
 
 from PyQt5 import QtWidgets
 from controller import MainWindow_controller
-# from utils import wongwong_logger_simple
 
 # Singleton 單例模式 (only one instance)
 from utils import WongWongLogger
-logger = WongWongLogger(level = "WARNING") 
-# 'CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'
+logger = WongWongLogger(level = "DEBUG") # 'CRITICAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'
 
 # logger = wongwong_logger_simple("root")
 # logger.debug('This message should go to the log file')
@@ -22,3 +22,5 @@ if __name__ == '__main__':
     window = MainWindow_controller()
     window.show()
     sys.exit(app.exec_())
+
+

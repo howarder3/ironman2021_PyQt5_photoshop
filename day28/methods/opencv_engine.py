@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import math
 
 from utils import WongWongLogger, WongWongDebugger, WongWongTimer
 logger = WongWongLogger()
@@ -44,13 +45,11 @@ class opencv_engine(object):
         return cv2.rectangle(img, left_up, right_down, color, thickness)
 
     @staticmethod    
-    def modify_lightness_saturation(img, lightness = 0, saturation = 0): # range: -100 ~ 100
-        logger.info(f"get lightness = {lightness}, saturation = {saturation}")
-        if lightness == 0 and saturation == 0: # no change
+    def modify_lightness(img, lightness = 0): # range: -100 ~ 100
+        logger.info(f"get lightness = {lightness}")
+        if lightness == 0: # no change
             return img
         # lightness 調整為  "1 +/- 幾 %"
-        # saturation 調整為 "1 +/- 幾 %"
-        origin_img = img
 
         # 圖像歸一化，且轉換為浮點型
         fImg = img.astype(np.float32)
@@ -64,6 +63,28 @@ class opencv_engine(object):
         hlsCopy[:, :, 1] = (1 + lightness / 100.0) * hlsCopy[:, :, 1]
         hlsCopy[:, :, 1][hlsCopy[:, :, 1] > 1] = 1  # 應該要介於 0~1，計算出來超過1 = 1
 
+        # 顏色空間反轉換 HLS -> BGR 
+        result_img = cv2.cvtColor(hlsCopy, cv2.COLOR_HLS2BGR)
+        result_img = ((result_img * 255).astype(np.uint8))
+
+
+        return result_img
+
+    @staticmethod    
+    def modify_saturation(img, saturation = 0): # range: -100 ~ 100
+        logger.info(f"get saturation = {saturation}")
+        if saturation == 0: # no change
+            return img
+        # saturation 調整為 "1 +/- 幾 %"
+
+        # 圖像歸一化，且轉換為浮點型
+        fImg = img.astype(np.float32)
+        fImg = fImg / 255.0
+        
+        # 顏色空間轉換 BGR -> HLS
+        hlsImg = cv2.cvtColor(fImg, cv2.COLOR_BGR2HLS)
+        hlsCopy = np.copy(hlsImg)
+    
         # 飽和度調整
         hlsCopy[:, :, 2] = (1 + saturation / 100.0) * hlsCopy[:, :, 2]
         hlsCopy[:, :, 2][hlsCopy[:, :, 2] > 1] = 1  # 應該要介於 0~1，計算出來超過1 = 1
@@ -72,7 +93,43 @@ class opencv_engine(object):
         result_img = cv2.cvtColor(hlsCopy, cv2.COLOR_HLS2BGR)
         result_img = ((result_img * 255).astype(np.uint8))
 
-
         return result_img
 
-    
+
+    @staticmethod
+    def modify_contrast_brightness(img, brightness=0 , contrast=0): # range: -100 ~ 100
+        logger.info(f"get brightness = {brightness}, contrast = {contrast}")
+        if brightness == 0 and contrast == 0:
+            return img
+        B = brightness / 255.0
+        c = contrast / 255.0 
+        k = math.tan((45 + 44 * c) / 180 * math.pi)
+
+        img = (img - 127.5 * (1 - B)) * k + 127.5 * (1 + B)
+          
+        # 所有值必須介於 0~255 之間，超過255 = 255，小於 0 = 0
+        img = np.clip(img, 0, 255).astype(np.uint8)
+
+        return img
+
+    # @staticmethod
+    # def modify_contrast(img, contrast=0): # range: -100 ~ +100
+    #     contrast = int(contrast/100*127) # range: -127 ~ +127
+    #     f = 131*(contrast + 127)/(127*(131-contrast))
+    #     new_image = f*(img) + 127*(1-f)
+    #     return new_image
+
+    # @staticmethod
+    # def modify_brightness(img, brightness=0): # range: -100 ~ 100
+    #     value = int(brightness/100*255) # range: -255 ~ 255
+    #     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    #     h, s, v = cv2.split(hsv)
+
+    #     lim = 255 - value
+    #     v[v > lim] = 255
+    #     v[v <= lim] += value
+
+    #     final_hsv = cv2.merge((h, s, v))
+    #     img = cv2.cvtColor(final_hsv, cv2.COLOR_HSV2BGR)
+    #     return img
+
