@@ -5,7 +5,7 @@ block_cipher = None
 
 
 a = Analysis(['start.py'],
-             pathex=['/home/ubuntu/Desktop/howard_tools_private/pyqt_practice/day1_install_and_hello'],
+             pathex=['/home/ubuntu/Desktop/wongwong_tools_private/pyqt_practice/day1_install_and_hello'],
              binaries=[],
              datas=[],
              hiddenimports=[],

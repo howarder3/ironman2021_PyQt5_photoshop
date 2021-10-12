@@ -1,52 +1,37 @@
 from PyQt5 import QtCore 
-# from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtWidgets import QMainWindow, QFileDialog
-# from PyQt5.QtCore import QThread, pyqtSignal
 
 import time
 import os
 
-
 from UI import Ui_MainWindow
-from img_controller import img_controller
-
-# set: big change
-# update: simple update for info, no calculation... (format: update_type_name)
-
-# private function: We do NOT want user directly call this function 
+from image_center import image_center
+from methods import method_lightness, method_zoom
 
 class MainWindow_controller(QMainWindow):
     def __init__(self):
-        super().__init__() # in python3, super(Class, self).xxx = super().xxx
+        super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.setup_control()
+        self.set_init_ui()
+        
+    def set_init_ui(self):
+        self.ui.btn_open_file.clicked.connect(self.open_file)     
 
-    def setup_control(self):
-        self.file_path = ''
-        self.img_controller = img_controller(img_path=self.file_path,
-                                             ui=self.ui)
-
-        self.ui.btn_open_file.clicked.connect(self.open_file)         
-        self.ui.btn_zoom_in.clicked.connect(self.img_controller.set_zoom_in)
-        self.ui.btn_zoom_out.clicked.connect(self.img_controller.set_zoom_out)
-        self.ui.slider_zoom.valueChanged.connect(self.getslidervalue)        
-
+    def image_wait_for_trigger(self):
+        self.methods_library = methods_library(self.ui, self.image_center)      
+    
     def open_file(self):
-        filename, filetype = QFileDialog.getOpenFileName(self, "Open file", "./") # start path        
-        self.init_new_picture(filename)
-
-    def init_new_picture(self, filename):
-        self.ui.slider_zoom.setProperty("value", 50)
-        self.img_controller.set_path(filename)        
-
-
-    def getslidervalue(self):        
-        self.img_controller.set_slider_value(self.ui.slider_zoom.value()+1)
-
-    # def getPos(self , event):
-    #     x = event.pos().x()
-    #     y = event.pos().y() 
-    #     print(f"(x, y) = ({x}, {y})")
-
+        filename, filetype = QFileDialog.getOpenFileName(self, "Open file Window", "./") # start path       
+        # filename, filetype = QFileDialog.getOpenFileName(self, "Open file Window", "./", "Video Files(*.mp4 *.avi)") # start path   
+        self.ui.label_filepath.setText(f"File path = {filename}")      
+        self.image_center = image_center(filename, self.ui.label_image)        
+        self.image_wait_for_trigger()
+         
+class methods_library(object):
+    def __init__(self, ui, image_center):
+        self.ui = ui
+        self.image_center = image_center
+        self.method_zoom = method_zoom(self.ui.slider_zoom, self.ui.label_zoom, self.image_center)
+        self.method_lightness = method_lightness(self.ui.slider_lightness, self.ui.label_lightness, self.image_center)
 

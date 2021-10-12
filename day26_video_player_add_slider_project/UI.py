@@ -56,7 +56,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Video Player by WongWong"))
         self.label_videoframe.setText(_translate("MainWindow", "video_player"))
         self.button_openfile.setText(_translate("MainWindow", "Openfile"))
         self.label_framecnt.setText(_translate("MainWindow", "current_frame/total_frame"))
