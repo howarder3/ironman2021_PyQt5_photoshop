@@ -12,10 +12,10 @@ def func4(x):
 func_list = [func1, func2, func3, func4]
 
 a = 0
-# for each_func in func_list:
-#     a = each_func(a) 
+for each_func in func_list:
+    a = each_func(a) 
 
 
-a = each_func(a) for each_func in func_list
+# a = each_func(a) for each_func in func_list
 
 print(a)
