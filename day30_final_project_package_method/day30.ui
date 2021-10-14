@@ -25,7 +25,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>670</y>
+      <y>790</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -98,7 +98,7 @@
    <widget class="QLabel" name="label_filepath">
     <property name="geometry">
      <rect>
-      <x>50</x>
+      <x>170</x>
       <y>770</y>
       <width>841</width>
       <height>71</height>
@@ -441,7 +441,7 @@
     <property name="geometry">
      <rect>
       <x>710</x>
-      <y>700</y>
+      <y>690</y>
       <width>421</width>
       <height>90</height>
      </rect>
@@ -489,6 +489,67 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="RecordSteps">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>660</y>
+      <width>160</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial Black</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 170, 0);</string>
+    </property>
+    <property name="text">
+     <string>Record Steps</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="text_recordsteps">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>660</y>
+      <width>421</width>
+      <height>121</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>670</y>
+      <width>160</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="btn_redo">
+       <property name="text">
+        <string>Redo</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_undo">
+       <property name="text">
+        <string>Undo</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
    <zorder>Background</zorder>
    <zorder>btn_open_file</zorder>
    <zorder>verticalLayoutWidget</zorder>
@@ -498,6 +559,9 @@
    <zorder>verticalLayoutWidget_3</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>verticalLayoutWidget_4</zorder>
+   <zorder>RecordSteps</zorder>
+   <zorder>text_recordsteps</zorder>
+   <zorder>horizontalLayoutWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -505,7 +569,7 @@
      <x>0</x>
      <y>0</y>
      <width>1282</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMenu">

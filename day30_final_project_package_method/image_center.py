@@ -6,15 +6,19 @@ import numpy as np
 import logging
 
 class method_steps_recoder(object):
-    def __init__(self):
+    def __init__(self, text_recordsteps):
         self.method_steps = []
+        self.text_recordsteps = text_recordsteps
 
     def add_each_method_step(self, each_method_step):
         self.method_steps.append(each_method_step)
 
-    def show_all_saved_steps(self):
-        for ele in self.method_steps:
-            print(ele)
+    def update_recordsteps(self):
+        msg = f"All saved steps: \n"
+        for idx, ele in enumerate(self.method_steps):
+            msg +=(f"{idx+1}: {ele}\n")
+        self.text_recordsteps.setText(msg)
+
 
 class label_mouse_controller(object):
     def __init__(self, image_center):
@@ -60,7 +64,7 @@ class image_center(object):
             self.origin_img_height, self.origin_img_width, self.origin_img_channel = self.origin_img.shape
         
         self.display_img = np.copy(self.origin_img) # make a clone
-        self.method_steps_recoder = method_steps_recoder() #record steps
+        self.method_steps_recoder = method_steps_recoder(self.ui.text_recordsteps) # record steps
         self.__update_label_img()
 
     def update_img(self, img):
@@ -75,6 +79,7 @@ class image_center(object):
         self.qpixmap = self.qpixmap.scaledToHeight(qpixmap_height)
 
     def __update_label_img(self):       
+        self.method_steps_recoder.update_recordsteps()
         bytesPerline = 3 * self.origin_img_width
         qimg = QImage(self.display_img, self.origin_img_width, self.origin_img_height, bytesPerline, QImage.Format_RGB888).rgbSwapped()
         self.qpixmap = QPixmap.fromImage(qimg)

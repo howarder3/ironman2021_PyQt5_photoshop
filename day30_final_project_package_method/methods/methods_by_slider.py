@@ -10,9 +10,9 @@ class method_lightness(slider_method_interface):
     def setimage(self, img):        
         return opencv_engine.modify_lightness(img, lightness=self.slider.value())
 
-    def update_img(self):
-        img = self.setimage(self.tmp_origin_img)
-        self.image_center.update_img(img)
+    # def update_img(self):
+    #     img = self.setimage(self.tmp_origin_img)
+    #     self.image_center.update_img(img)
 
     # trigger function, get your signal from here
     def setsliderlabel(self):
@@ -28,9 +28,9 @@ class method_saturation(slider_method_interface):
     def setimage(self, img):        
         return opencv_engine.modify_saturation(img, saturation=self.slider.value())
 
-    def update_img(self):
-        img = self.setimage(self.tmp_origin_img)
-        self.image_center.update_img(img)
+    # def update_img(self):
+    #     img = self.setimage(self.tmp_origin_img)
+    #     self.image_center.update_img(img)
 
     # trigger function, get your signal from here
     def setsliderlabel(self):
@@ -47,9 +47,9 @@ class method_contrast(slider_method_interface):
     def setimage(self, img):        
         return opencv_engine.modify_contrast_brightness(img, contrast=self.slider.value())
 
-    def update_img(self):
-        img = self.setimage(self.tmp_origin_img)
-        self.image_center.update_img(img)
+    # def update_img(self):
+    #     img = self.setimage(self.tmp_origin_img)
+    #     self.image_center.update_img(img)
 
     # trigger function, get your signal from here
     def setsliderlabel(self):
@@ -67,9 +67,9 @@ class method_brightness(slider_method_interface):
     def setimage(self, img):        
         return opencv_engine.modify_contrast_brightness(img, brightness=self.slider.value())
 
-    def update_img(self):
-        img = self.setimage(self.tmp_origin_img)
-        self.image_center.update_img(img)
+    # def update_img(self):
+    #     img = self.setimage(self.tmp_origin_img)
+    #     self.image_center.update_img(img)
 
     # trigger function, get your signal from here
     def setsliderlabel(self):
@@ -99,7 +99,7 @@ class method_zoom(slider_method_interface):
         self.label.setText(f"{self.prefix}{self.ratio_rate*1000:.0f} %")
         self.image_center.set_zoom_value(self.get_zoom_value())
         self.set_label_img_shape()
-        self.update_img() 
+        self.update_img()  # for the efficiency reason, we don't let the picture change with our slider
 
     def get_zoom_value(self):
         return self.ratio_rate*10 # 0.01 ~ 1.0 ->　0.1 ~ 10.0
